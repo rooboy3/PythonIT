@@ -1,10 +1,8 @@
 import random
-
 lowBound = 0
 highBound = 100
 response = ''
 randomNumber = random.randint(lowBound,highBound)
-
 while response != "yes":
     print ("Is it ", randomNumber, " ?")
     response = input()
