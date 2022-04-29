@@ -7,7 +7,7 @@ while response != "yes":
     print ("Is it ", randomNumber, " ?")
     response = input()
     if response == "higher":
-        lowBound = randomNumber + 1   
+        lowBound = randomNumber + 1
         randomNumber = random.randint(lowBound,highBound)
     elif response == "lower":
         highBound = randomNumber - 1
