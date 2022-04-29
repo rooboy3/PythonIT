@@ -18,4 +18,4 @@ while response != "yes":
         print ("Woohooo, I'm so good'")
         break
     else:
-        print ('Huh? "higher", "lower", or "yes" are valid responses.')
+        print ('Invalid response, "Higher", "Lower", and "Yes" are applicable responses.')
