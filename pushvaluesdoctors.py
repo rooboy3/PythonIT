@@ -1,9 +1,11 @@
-import csv, sqlite3
+# IMPORTS
+import csv, sqlite3, re
 
+# PRE-DEFINE SHORTCUTS
 connection = sqlite3.connect("docotors.db")
-print(connection.total_changes)
 cursor = connection.cursor()
 
+# CREATE TABLES AND INSERT DATA FROM .CSV FILES
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS hospital
     (hospital_id INTEGER NOT NULL,
@@ -29,21 +31,34 @@ with open('doctors.csv','r') as fin:
     to_db = [(i['doctor_id'], i['doctor_name'], i['hospital_id'], i['joining_date'], i['specialty'], i['salary']) for i in dr]
 cursor.executemany("INSERT INTO doctor (doctor_id, doctor_name, hospital_id, joining_date, specialty, salary) VALUES (?, ?, ?, ?, ?, ?);", to_db)
 
-print("NUMBER 1 !!!!!!!!!!!!!")
+# PRINT ALL DOCTORS AND INFO
 rows = cursor.execute("SELECT * FROM doctor").fetchall()
-print(rows)
 print (" {:<15}|{:<15}|{:<15}|{:<15}|{:<15}|{:<15}".format("doctor_id", "doctor_name", "hospital_id", "joining_date", "specialty", "salary"))
 print ("----------------+---------------+---------------+---------------+---------------+------")
 for v in rows:
     doctor_id, doctor_name, hospital_id, joining_date, specialty, salary = v
     print (" {:<15}|{:<15}|{:<15}|{:<15}|{:<15}|{:<15}".format( doctor_id, doctor_name, hospital_id, joining_date, specialty, salary))
+print("")
+
+# UPDATE "MICHAEL" SALARY AND RE-PRINT
 new_salary_number = 30000
 updated_doctor_name = "Michael"
+old_salary = cursor.execute("SELECT salary FROM doctor WHERE doctor_name = ?",
+    (updated_doctor_name,),
+).fetchall()
+old_pay_edit = re.sub(r"[\(\[\)\,\]]",'',str(old_salary))
+print("Current salary for " + updated_doctor_name + " is: " + old_pay_edit)
+print("Updating salary for \"" + updated_doctor_name + "\"")
 cursor.execute(
     "UPDATE doctor SET salary = ? WHERE doctor_name = ?",
     (new_salary_number, updated_doctor_name),
 ).fetchall()
-print("\nUpdating salary for \"" + updated_doctor_name + "\n")
+new_salary = cursor.execute("SELECT salary FROM doctor WHERE doctor_name = ?",
+    (updated_doctor_name,),
+).fetchall()
+new_pay_edit = re.sub(r"[\(\[\)\,\]]",'',str(new_salary))
+print("Updated salary for " + updated_doctor_name + " is: " + new_pay_edit)
+print("")
 target_doctor_name = "Michael"
 rows3 = cursor.execute(
     "SELECT doctor_id, doctor_name, hospital_id, joining_date, specialty, salary FROM doctor WHERE doctor_name = ?",
