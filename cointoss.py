@@ -48,16 +48,27 @@ def coinToss():
         print("number "+str(number))
         print("Wincoutn "+str(wincount))
         def scorecalc():
+            text1=open("score.txt","r+")
+            score = text1.read()
+            text1.close()
+            winscore = 0
+            losscore = 0
             for i in range(wincount):
                 if(wincount > 0):
-                    score = int(scoreold)+(((wincount*bet_amt))*2)
-                    print(str(score) + str("up"))
+                    winscore = int(scoreold)+(((wincount*bet_amt))*2)
+                    print(str(winscore) + str("up"))
                 break
             for i in range(losscount):
                 if(losscount > 0):
-                    score = int(scoreold)-(((losscount*bet_amt)))
-                    print(str(score) + str("down"))
+                    losscore = int(scoreold)-(((losscount*bet_amt)))
+                    print(str(losscore) + str("down"))
                 break
+            print(str(score) + "score is ?")
+            if (losscore > winscore):
+                tempb = losscore - winscore
+            else:
+                tempb = winscore - losscore
+            score = int(score) + tempb
             print(score)
             scorenew = int(score)
             text2=open("score.txt","w")
