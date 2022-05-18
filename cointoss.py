@@ -29,6 +29,7 @@ def coinToss():
     else:
         score = int(score) - int(number)*int(bet_amt)
         score = str(score)
+        newscore = score
         print(score)
         recordList = []
         for i in range(number):
@@ -37,8 +38,8 @@ def coinToss():
                 recordList.append("Heads")
                 wincount = wincount + 1
             else:
-                wincount = wincount - 1
                 recordList.append("Tails")
+                losscount = losscount + 1
         print(wincount)
         print(str(recordList))
         print("The coin landed on heads: "+str(recordList.count("Heads"))+" times."+" The coin landed on tails: "+str(recordList.count("Tails"))+" times.")
@@ -47,25 +48,21 @@ def coinToss():
         print("number "+str(number))
         print("Wincoutn "+str(wincount))
         def scorecalc():
-            step = wincount
-            print(step)
-            for i in range(number):
+            for i in range(wincount):
                 if(wincount > 0):
                     score = int(scoreold)+(((wincount*bet_amt))*2)
                     print(str(score) + str("up"))
-                    step = step + 1
-                elif(wincount < 0):
-                    score = int(scoreold)+(((wincount*bet_amt)))
+                break
+            for i in range(losscount):
+                if(losscount > 0):
+                    score = int(scoreold)-(((losscount*bet_amt)))
                     print(str(score) + str("down"))
-                    step = step + 1
-                elif(wincount == 0):
-                    print("bunga")
-                    score = (int(scoreold)+((((number/2)*bet_amt))*2))/2
+                break
+            print(score)
+            scorenew = int(score)
+            text2=open("score.txt","w")
+            text2.write(str(scorenew))
+            text2.close()
+            print("Skull emoji x7")
         scorecalc()
-        print(score)
-        scorenew = int(score)
-        text2=open("score.txt","w")
-        text2.write(str(scorenew))
-        text2.close()
-        print("Skull emoji x7")
 coinToss()
