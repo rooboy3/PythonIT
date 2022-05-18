@@ -51,6 +51,7 @@ def coinToss():
             text1=open("score.txt","r+")
             score = text1.read()
             text1.close()
+            scoreafter = int(score) - int(number)*int(bet_amt)
             winscore = 0
             losscore = 0
             for i in range(wincount):
@@ -64,11 +65,18 @@ def coinToss():
                     print(str(losscore) + str("down"))
                 break
             print(str(score) + "score is ?")
+            print("Winsc"+str(winscore))
+            print("Lossc"+str(losscore))
             if (losscore > winscore):
                 tempb = losscore - winscore
+                print("Top score" +str(score))
+                print("tempb"+str(tempb))
             else:
+                print(winscore)
+                print(losscore)
                 tempb = winscore - losscore
-            score = int(score) + tempb
+                print("Bot score" +str(score))
+            score = tempb
             print(score)
             scorenew = int(score)
             text2=open("score.txt","w")
