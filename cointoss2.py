@@ -44,5 +44,4 @@ def coinToss():
         text2=open("score.txt","w")
         text2.write(str(score))
         text2.close()
-        print("Ugggg")
 coinToss()
