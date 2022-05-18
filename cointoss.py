@@ -46,13 +46,26 @@ def coinToss():
         print("bet_amt "+str(bet_amt))
         print("number "+str(number))
         print("Wincoutn "+str(wincount))
-        if(wincount > 0):
-            score = (((wincount*bet_amt)*2)*number)-int(scoreold)
-        else:
-            score = (((wincount*bet_amt))*number)
+        def scorecalc():
+            step = wincount
+            print(step)
+            for i in range(number):
+                if(wincount > 0):
+                    score = int(scoreold)+(((wincount*bet_amt))*2)
+                    print(str(score) + str("up"))
+                    step = step + 1
+                elif(wincount < 0):
+                    score = int(scoreold)+(((wincount*bet_amt)))
+                    print(str(score) + str("down"))
+                    step = step + 1
+                elif(wincount == 0):
+                    print("bunga")
+                    score = (int(scoreold)+((((number/2)*bet_amt))*2))/2
+        scorecalc()
         print(score)
-        scorenew = int(score)+int(scoreold)
+        scorenew = int(score)
         text2=open("score.txt","w")
         text2.write(str(scorenew))
         text2.close()
+        print("Skull emoji x7")
 coinToss()
