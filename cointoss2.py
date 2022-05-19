@@ -39,7 +39,7 @@ def coinToss():
         print("The coin landed on heads: "+str(recordList.count("Heads"))+" times."+" The coin landed on tails: "+str(recordList.count("Tails"))+" times.")
         print("Score Temp"+str(scoretemp))
         print("Score"+str(score))
-        score = int(score)+(int(recordList.count("Heads")*2))-(int(recordList.count("Tails")))
+        score = int(scoretemp)+(int(recordList.count("Heads")*2))-(int(recordList.count("Tails")))
         print(score)
         text2=open("score.txt","w")
         text2.write(str(score))
