@@ -12,6 +12,9 @@ def game():
         computer_choice = random.choice(base_choice)
 
         user_choice = input('(scissors, paper, rock) Type your choice: ').strip().lower()
+        if user_choice not in base_choice:
+            print("You must choose \"Rock\" \"Paper\" or \"Scissors\". Make sure to check your spelling!")
+            exit()
         print()
         computer_wins = 'The computer wins!'
         you_win = 'You win!'

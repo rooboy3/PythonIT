@@ -1,12 +1,12 @@
 from questions import quiz
 
 
-def check_ans(question, ans, attempts, score):
+def check_ans(Question, ans, attempts, score):
     """
-    Takes the arguments, and confirms if the answer provided by user is correct.
-    Converts all answers to lower case to make sure the quiz is not case sensitive.
+    Takes the arguments, and confirms if the Answer provided by user is correct.
+    Converts all Answers to lower case to make sure the quiz is not case sensitive.
     """
-    if quiz[question]['answer'].lower() == ans.lower():
+    if quiz[Question]['Answer'].lower() == ans.lower():
         print(f"Correct Answer! \nYour score is {score + 1}!")
         return True
     else:
@@ -15,9 +15,9 @@ def check_ans(question, ans, attempts, score):
 
 
 def print_dictionary():
-    for question_id, ques_answer in quiz.items():
-        for key in ques_answer:
-            print(key + ':', ques_answer[key])
+    for Question_id, ques_Answer in quiz.items():
+        for key in ques_Answer:
+            print(key + ':', ques_Answer[key])
 
 
 def intro_message():
@@ -34,14 +34,14 @@ def intro_message():
 intro = intro_message()
 while True:
     score = 0
-    for question in quiz:
+    for Question in quiz:
         attempts = 3
         while attempts > 0:
-            print(quiz[question]['question'])
-            answer = input("Enter Answer (To move to the next question, type 'skip') : ")
-            if answer == "skip":
+            print(quiz[Question]['Question'])
+            Answer = input("Enter Answer (To move to the next Question, type 'skip') : ")
+            if Answer == "skip":
                 break
-            check = check_ans(question, answer, attempts, score)
+            check = check_ans(Question, Answer, attempts, score)
             if check:
                 score += 1
                 break
@@ -49,7 +49,7 @@ while True:
 
     break
 
-print(f"Your final score is {score}!\n\n")
-print("Want to know the correct answers? Please see them below! ;)\n")
-print_dictionary()
+print(f"Your final score is {score}!")
 print("Thanks for playing!")
+print("Want to know the correct Answers? Please see them below! ;)")
+print_dictionary()
