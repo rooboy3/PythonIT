@@ -26,7 +26,7 @@ def intro_message():
     Returns true regardless of any key pressed.
     """
     print("Welcome to this fun food quiz! \nAre you ready to test your knowledge?")
-    input("Press any key to start the fun ;) ")
+    input("Press any key to start the fun :) ")
     return True
 
 
@@ -51,5 +51,5 @@ while True:
 
 print(f"Your final score is {score}!")
 print("Thanks for playing!")
-print("Want to know the correct Answers? Please see them below! ;)")
+print("Want to know the correct Answers? Please see them below! :)")
 print_dictionary()
