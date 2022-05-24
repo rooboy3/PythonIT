@@ -8,7 +8,7 @@ cursor = connection.cursor()
 # CREATE TABLES AND INSERT DATA FROM .CSV FILES
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS hospital
-    (hospital_id INTEGER NOT NULL,
+    (hospital_id INTEGER NOT NULL PRIMARY KEY,
     hospital_name TEXT NOT NULL,
     bed_count INTEGER NOT NULL)
     ''')
