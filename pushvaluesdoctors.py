@@ -43,21 +43,34 @@ print("")
 # UPDATE "MICHAEL" SALARY AND RE-PRINT
 new_salary_number = 30000
 updated_doctor_name = "Michael"
+new_job_name = "Sr. Oncologist"
 old_salary = cursor.execute("SELECT salary FROM doctor WHERE doctor_name = ?",
     (updated_doctor_name,),
 ).fetchall()
+old_job = cursor.execute("SELECT specialty FROM doctor WHERE doctor_name = ?",
+    (updated_doctor_name,),
+).fetchall()
 old_pay_edit = re.sub(r"[\(\[\)\,\]]",'',str(old_salary))
-print("Current salary for " + updated_doctor_name + " is: " + old_pay_edit)
+old_job_edit = re.sub(r"[\(\[\)\,\]]",'',str(old_job))
+print("Current salary for " + updated_doctor_name + " is: " + old_pay_edit + " job is: "+ old_job_edit)
 print("Updating salary for \"" + updated_doctor_name + "\"")
 cursor.execute(
     "UPDATE doctor SET salary = ? WHERE doctor_name = ?",
     (new_salary_number, updated_doctor_name),
 ).fetchall()
+cursor.execute(
+    "UPDATE doctor SET specialty = ? WHERE doctor_name = ?",
+    (new_job_name, updated_doctor_name),
+).fetchall()
 new_salary = cursor.execute("SELECT salary FROM doctor WHERE doctor_name = ?",
     (updated_doctor_name,),
 ).fetchall()
+new_job = cursor.execute("SELECT specialty FROM doctor WHERE doctor_name = ?",
+    (updated_doctor_name,),
+).fetchall()
 new_pay_edit = re.sub(r"[\(\[\)\,\]]",'',str(new_salary))
-print("Updated salary for " + updated_doctor_name + " is: " + new_pay_edit)
+new_job_edit = re.sub(r"[\(\[\)\,\]]",'',str(new_job))
+print("Updated salary for " + updated_doctor_name + " is: " + new_pay_edit + " Promoted to: " + str(new_job_edit))
 print("")
 target_doctor_name = "Michael"
 rows3 = cursor.execute(
